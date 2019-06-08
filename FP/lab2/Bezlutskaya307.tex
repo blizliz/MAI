@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listing}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,2 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы М8О-307 МАИ \textit{Безлуцкая Елизавета}, \textnumero 2 по списку \\
+\makebox[7cm]{Контакты: {\tt lizabezlutskaya@gmail.com} \hfill} \\
+\makebox[7cm]{Работа выполнена: 28.03.2019 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Простейшие функции работы со списками Коммон Лисп.
+
+\section{Цель работы}
+Научиться конструировать списки, находить элемент в списке, использовать схему линейной и древовидной рекурсии для обхода и реконструкции плоских списков и деревьев.
+
+\section{Задание (вариант №11)}
+Дан список действительных чисел ($x_{1}$ ... $x_{n}$), \(n \geqslant 2\).
+Запрограммируйте рекурсивно на языке Коммон Лисп функцию, вычисляющую выражение вида:\\
+
+$(x_{1} + x_{n}) * (x_{2} + x_{n-1}) * ... * (x_{n} + x_{1})$.
+
+\section{Оборудование студента}
+Процессор Intel Core i5-3230M 4\,@\,2.6GHz, память: 350Gb, разрядность системы: 64.
+
+\section{Программное обеспечение}
+Ubuntu 16.04 LTS, clisp compiler
+
+\section{Идея, метод, алгоритм}
+Функция {\tt product-sum2} вызывает вспомогательную функцию {\tt sub-product-sum2} cо следующими аргументами: списком {\tt l} и перевёрнутым списком {\tt l}. {\tt sub-product-sum2} рекурсивна и работает следующим образом:
+\begin{itemize}
+\setlength{\itemsep}{-1mm} % уменьшает расстояние между элементами списка
+\item если список {\tt l} пуст, функция вернет 1, иначе:
+\item перемножаем сумму первых элементов списков и результат рекурсивного вызова функции {\tt sub-product-sum2} с аргументами в виде хвостов текущих списков.
+\end{itemize}
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+
+\begin{lstlisting}
+(defun sub-product-sum (l1 l2)
+    (cond ((null l1) 1)
+          (t (* (+ (first l1)(first l2))(sub-product-sum (rest l1)(rest l2))))))
+
+(defun product-sum2 (l)
+    (sub-product-sum l (reverse l)))
+\end{lstlisting}
+
+\subsection{Результаты работы}
+\begin{lstlisting}
+(print (product-sum2 '(1 2 3 4 5)))
+7776
+(print (product-sum2 '(0 0)))
+0
+(print (product-sum2 '(1 -1)))
+0
+(print (product-sum2 '(1 0 1 1)))
+4
+(print (product-sum2 '(-8 5)))
+9
+(print (product-sum2 '(-8 -5)))
+169
+(print (product-sum2 '(-8 -5 5)))
+-90
+(print (product-sum2 '(1 3 -5 4 6 8 -2 4 9 4 0)))
+12845056 
+\end{lstlisting}
+
+%\section{Дневник отладки}
+%\begin{tabular}{|c|p{5cm}|p{5cm}|c|}
+%\hline
+%Дата & Событие & Действие по исправлению & Примечание \\
+%\hline
+%\end{tabular}
+
+\section{Замечания автора по существу работы}
+С хвостовой рекурсией я познакомилась, когда проходила курс <<Логическое программирование>> и писала код лабораторных работ на языке Prolog. В связи с этим трудностей у меня не возникло.
+
+\section{Выводы}
+Первоначально задуманное решение не требовало дополнительной памяти, но требовало отсечения последнего элемента списка. Варианты реализации такой функции мне показались не очень привлекательными, поэтому я изменила тактику.
+В итоге программа работает за линейное время и память. 
+\end{document}\grid
+\grid
