@@ -1,0 +1,201 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listing}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,4 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы М8О-307 МАИ \textit{Безлуцкая Елизавета}, \textnumero 2 по списку \\
+\makebox[7cm]{Контакты: {\tt lizabezlutskaya@gmail.com} \hfill} \\
+\makebox[7cm]{Работа выполнена: 23.05.2019 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Знаки и строки.
+
+\section{Цель работы}
+Научиться работать с литерами (знаками) и строками при помощи функций обработки строк и общих функций работы с последовательностями.
+
+\section{Задание (вариант №36)}
+Запрограммировать на языке Коммон Лисп функцию, принимающую один аргумент - текст.\\
+
+Если в тексте нет малых букв, функция должна вернуть этот текст без изменения. В противном случае функция должна вернуть копию текста, в котором после всех слов, состоящих из малых букв, вставлен знак пунктуации , (запятая).\\
+
+Функция должна работать как для малых латинских, так и малых русских букв.
+
+\section{Оборудование студента}
+Процессор Intel Core i5-3230M 4\,@\,2.6GHz, память: 16Gb, разрядность системы: 64.
+
+\section{Программное обеспечение}
+Ubuntu 16.04 LTS, clisp compiler
+
+\section{Идея, метод, алгоритм}
+Основная функция {\tt text-processing} вызывает вспомогательную функцию \\
+{\tt sentence-processing}, которая обрабатывает каждое предложение текста по отдельности.\\
+
+Функция {\tt sentence-processing} работает следующим образом:
+\begin{itemize}
+\setlength{\itemsep}{-1mm} % уменьшает расстояние между элементами списка
+\item если встретилось слово, в нём проверяется наличие знака нижнего региста
+\begin{itemize}
+\item встретился хоть один знак нижнего регистра -- в возвращаемую коллекцию добавляется данное слово плюс знак запятой после слова
+\item иначе -- слово без изменений
+\end{itemize}
+\item если встретились знаки-разделители(один или более) -- в возвращаемую коллекцию добавляется вся последовательность разделителей
+\end{itemize}
+
+Результат обработки предложения должен быть строкой, а функция {\tt sentence-processing} возвращает последовательность строк. Для преобразования <<последовательность строк-одна строка>> вводится функция {\tt concat-string}.
+
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle} 
+
+\begin{lstlisting}
+(defun whitespace-char-p (char)
+  (member char '(#\Space #\Tab #\Newline)))
+
+(defun russian-lower-case-p (char)
+  (position char "абвгдеёжзиклмнопрстуфхцчшщъыьэюя"))
+
+(defun text-processing (text)
+    (loop for sentence in text
+        collect (concat-string (sentence-processing sentence))))
+
+(defun sentence-processing (string)
+    (loop with len = (length string)
+        for left = 0 then (or (position-if-not #'whitespace-char-p string :start right) len)
+        for right = (or (position-if #'whitespace-char-p string :start left) len)
+
+        if (or (some #'lower-case-p (subseq string left right)) 
+               (some #'russian-lower-case-p (subseq string left right)))
+            collect (concatenate 'string (subseq string left right) ",")
+        if (not (or (some #'lower-case-p (subseq string left right)) 
+                    (some #'russian-lower-case-p (subseq string left right))))
+            collect (subseq string left right)
+
+        collect (subseq string right 
+            (or (position-if-not #'whitespace-char-p string :start right) len))
+        
+        while (< right len)))
+
+(defun concat-string (list)
+  "A non-recursive function that concatenates a list of strings."
+  (if (listp list)
+      (let ((result ""))
+        (dolist (item list)
+          (if (stringp item)
+              (setq result (concatenate 'string result item))))
+        result)))
+        result)))
+\end{lstlisting}
+
+
+\subsection{Результаты работы}
+\begin{lstlisting}
+(setq txt '("А СУДЬИ КТо? – За древностию лет"
+
+"К свободной жизни их вражда непримирима,
+Сужденья черпают из забытых газет
+Времён Очаковских и покоренья Крыма;"))
+
+(print (text-processing txt))
+
+("А СУДЬИ КТо?, – За, древностию, лет,"
+ "К свободной, жизни, их, вражда, непримирима,,
+Сужденья, черпают, из, забытых, газет,
+Времён, Очаковских, и, покоренья, Крыма;,") 
+
+
+(setq txt '("ГДЕ? УКАЖИТЕ НАМ, ОТЕЧЕСТВА ОТЦЫ,"
+
+"КОТОРЫХ МЫ ДОЛЖНЫ ПРИНЯТЬ ЗА ОБРАЗЦЫ?"))
+
+(print (text-processing txt))
+
+("ГДЕ? УКАЖИТЕ НАМ, ОТЕЧЕСТВА ОТЦЫ," "КОТОРЫХ МЫ ДОЛЖНЫ ПРИНЯТЬ ЗА ОБРАЗЦЫ?") 
+\end{lstlisting}
+
+\section{Дневник отладки}
+\begin{tabular}{|c|p{5cm}|p{5cm}|p{3cm}|}
+\hline
+Дата & Событие & Действие по исправлению & Примечание \\
+\hline
+22.05.19 & Излишняя реализация функции для проверки слова на наличие знаков нижнего регистра & Использован предикат some & \\
+\hline
+28.05.19 & Функция lower-case-p гарантированно работает только для
+латинских букв & Добавлена функция russian-lower-case-p для корректной работы с русскими буквами & \\
+\hline
+\end{tabular}
+
+\section{Замечания автора по существу работы}
+Данная лабораторная работа далась мне с трудом, так как я до сих пор неосознанно переключаюсь на язык C++.
+
+\section{Выводы}
+При выполнении работы пришлось написать много излишнего кода: чтобы посмотреть, как работает множество новых для меня конструкций, исправить неизящно написанные и неработающие функции. В очередной раз нахожу язык Common Lisp неудобным для меня, порой даже сложным. Возникает вопрос, обосновано ли данное неудобство. Пока что определенного ответа у меня нет.
+\end{document}
