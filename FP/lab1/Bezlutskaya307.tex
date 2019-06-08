@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listing}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection.}{0.3em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection.}{0.3em}{}
+
+\titlespacing{\section}{0pt}{*2}{*2}
+\titlespacing{\subsection}{0pt}{*1}{*1}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\usepackage{listings}
+\lstloadlanguages{Lisp}
+\lstset{extendedchars=false,
+	breaklines=true,
+	breakatwhitespace=true,
+	keepspaces = true,
+	tabsize=2
+}
+\begin{document}
+
+
+\section*{Отчет по лабораторной работе №\,1 
+по курсу \guillemotleft  Функциональное программирование\guillemotright}
+\begin{flushright}
+Студент группы М8О-307 МАИ \textit{Безлуцкая Елизавета}, \textnumero 2 по списку \\
+\makebox[7cm]{Контакты: {\tt lizabezlutskaya@gmail.com} \hfill} \\
+\makebox[7cm]{Работа выполнена: 17.03.2019 \hfill} \\
+\ \\
+Преподаватель: Иванов Дмитрий Анатольевич, доц. каф. 806 \\
+\makebox[7cm]{Отчет сдан: \hfill} \\
+\makebox[7cm]{Итоговая оценка: \hfill} \\
+\makebox[7cm]{Подпись преподавателя: \hfill} \\
+
+\end{flushright}
+
+\section{Тема работы}
+Примитивные функции и особые операторы Коммон Лисп.
+
+\section{Цель работы}
+Научиться вводить S-выражения в Лисп-систему, определять переменные и функции, работать с условными операторами, работать с числами, использую схему линейной и древовидной рекурсии.
+
+\section{Задание (вариант №40)}
+Запрограммируйте на языке Коммон Лисп функционал {\tt product}. Функционал должен вычислять произведение чисел от {\tt a} до {\tt b} и принимать в качестве входных параметров одноместную функцию {\tt f}, а также {\tt a} и {\tt b}.
+
+\section{Оборудование студента}
+Процессор Intel Core i5-3230M 4\,@\,2.6GHz, память: 350Gb, разрядность системы: 64.
+
+\section{Программное обеспечение}
+Ubuntu 16.04 LTS, clisp compiler
+
+\section{Идея, метод, алгоритм}
+Функция {\tt product} рекурсивна и работает следующим образом:
+\begin{itemize}
+\setlength{\itemsep}{-1mm} % уменьшает расстояние между элементами списка
+\item если левая граница больше, чем правая, функция вернет 1
+\item если левая граница меньше, чем правая, то перемножаем левую границу и результат рекурсивного вызова функции {\tt product} с параметрами {\tt a + 1} и {\tt b}, как только встретим ситуацию, когда {\tt a} равно {\tt b}, то
+\item вернуть {\tt f} с параметром {\tt b}.
+\end{itemize}
+
+\section{Сценарий выполнения работы}
+
+\section{Распечатка программы и её результаты}
+
+\subsection{Исходный код}
+
+\begin{lstlisting}
+(defun product (f a b)
+  (cond ((= a b) (funcall f b))
+        ((> a b) 1)
+        ((< a b)(* (funcall f a) (product f (1+ a) b)))))
+\end{lstlisting}
+
+\subsection{Результаты работы}
+\begin{lstlisting}
+(print (product #'1+ -1 4))
+0
+(print (product #'1+ 1 4))
+120
+(print (product #'1+ 4 4))
+5
+(print (product #'1+ 6 4))
+1
+(print (product #'1+ -5 2))
+0
+(print (product #'1+ -7 -3))
+-720
+(print (product #'abs -7 -3))
+2520
+\end{lstlisting}
+
+\section{Дневник отладки}
+\begin{tabular}{|c|p{5cm}|p{5cm}|c|}
+\hline
+Дата & Событие & Действие по исправлению & Примечание \\
+\hline
+17.03.19 & В ситуации, когда левая граница больше правой, функция возвращала 1 вместо 0 & Конструкция if заменена на cond с целью добавления условия <<левая граница равна правой>>, при выполнении которого возвращается правая граница, обработанная функцией {\tt f}. А при выполнении услоия <<левая граница больше, чем правая>>, функция возвращает 1. & \\
+\hline
+18.03.19 & Произведение нулевого количество сомножителей трактуется как 1. & При попадании в ветвь с условием {\tt a} больше {\tt b}, выходим с результатом 1. & \\
+\hline
+\end{tabular}
+
+\section{Замечания автора по существу работы}
+Подозреваю, я не первая, кому было так трудно разобраться в огромном количестве скобок. Если бы не данная особенность языка, программировать на языке Lisp мне было бы приятнее.
+
+\section{Выводы}
+Большую часть времени я потратила на то, чтобы изучить синтаксис языка, вспомнить необходимые мне конструкции и отключиться от языка C++. Чтобы решить задачу, сначала я нарисовала дерево рекурсии и быстро написала решение, которое мне пришло в голову. Затем придумала тесты, которые потенциально могли сломать его, и привела код в финальный вид.
+Думаю, ничего сложного.
+
+\end{document}\grid
+\grid
