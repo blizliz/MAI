@@ -1,0 +1,18 @@
+.nav_container {
+  display: flex;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
+.sidenav-content {
+  display: block;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#menu-button {
+  margin: 20px;
+}
