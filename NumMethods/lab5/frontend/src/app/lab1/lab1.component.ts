@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {generateInlineTypeCtor} from '@angular/compiler-cli/src/ngtsc/typecheck/src/type_constructor';
 
 declare var Plotly: any;
 declare var tridiagonalMatrixAlgorithm: any;
@@ -31,6 +30,7 @@ function analSolutionGrid(N, K, a, tau, h) {
   }
   return grid;
 }
+
 function explicitScheme(N, K, koeff, tau, h) {
   const sigma = koeff * koeff * tau / (h * h);
   const grid = [];
@@ -157,7 +157,6 @@ function CrankNicholsonSchemes(N, K, koeff, tau, h) {
 })
 
 export class Lab1Component implements OnInit {
-  solved = false;
   l = Math.PI;
   h;
   tau;
@@ -232,28 +231,50 @@ export class Lab1Component implements OnInit {
     };
     Plotly.newPlot('analytic', dataAnalytic, layoutAnalytic);
 
+    const errorExp = [];
+    for (let i = 0; i < gridExp.length; i++) {
+      errorExp[i] = [];
+      for (let j = 0; j < gridExp[i].length; j++) {
+        errorExp[i][j] = Math.abs(gridAnal[i][j] - gridExp[i][j]);
+      }
+    }
+    const errorImp = [];
+    for (let i = 0; i < gridImp.length; i++) {
+      errorImp[i] = [];
+      for (let j = 0; j < gridImp[i].length; j++) {
+        errorImp[i][j] = Math.abs(gridAnal[i][j] - gridImp[i][j]);
+      }
+    }
+    const errorCN= [];
+    for (let i = 0; i < gridCN.length; i++) {
+      errorCN[i] = [];
+      for (let j = 0; j < gridCN[i].length; j++) {
+        errorCN[i][j] = Math.abs(gridAnal[i][j] - gridCN[i][j]);
+      }
+    }
+
     const expTrace = {
       // x: Array.from(Array(gridExp.length).keys()),
-      y: gridExp.map(s => this.sum(s) / s.length),
+      y: errorExp.map(s => this.sum(s) / s.length),
       type: 'scatter',
       name: 'Explicit'
     };
 
     const impTrace = {
       // x: Array.from(Array(gridExp.length).keys()),
-      y: gridImp.map(s => this.sum(s) / s.length),
+      y: errorImp.map(s => this.sum(s) / s.length),
       type: 'scatter',
       name: 'Implicit'
     };
 
-    const analTrace = {
+    const CNTrace = {
       // x: Array.from(Array(gridExp.length).keys()),
-      y: gridAnal.map(s => this.sum(s) / s.length),
+      y: errorCN.map(s => this.sum(s) / s.length),
       type: 'scatter',
-      name: 'Analytic'
+      name: 'CrankNicholson'
     };
 
-    Plotly.newPlot('solution-comparison', [expTrace, impTrace, analTrace]);
+    Plotly.newPlot('solution-comparison', [expTrace, impTrace, CNTrace]);
 
     const layoutCN = {
       title: 'CN',

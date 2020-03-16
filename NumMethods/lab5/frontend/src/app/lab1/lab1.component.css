@@ -2,7 +2,7 @@ mat-card {
   margin: 20px;
 }
 
-#explicit-implicit-scheme {
+.schemes {
   display: flex;
 }
 

@@ -30,7 +30,9 @@
             ],
             "scripts": [
               "./node_modules/plotly.js/dist/plotly.min.js",
-              "src/assets/js/tridiagonal-matrix-algorithm.js"
+              "src/assets/js/tridiagonal-matrix-algorithm.js",
+              "src/assets/js/iterative-method.js",
+              "src/assets/js/seidel-method.js"
             ]
           },
           "configurations": {
