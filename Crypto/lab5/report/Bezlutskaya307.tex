@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.png}
+
+
+\begin{document}
+
+\section*{Лабораторная работа №\,5 по курсу криптографии}
+
+Выполнила студентка группы М8О-307Б \textit{Безлуцкая Елизавета}.
+
+\subsection*{Условие}
+Сравнить:
+\begin{enumerate}
+\item два осмысленных текста на естественном языке
+\item осмысленный текст и текст
+из случайных букв
+\item осмысленный текст и текст из случайных слов
+\item два текста из
+случайных букв
+\item два текста из случайных слов
+\end{enumerate}
+\noindent
+Считать процент совпадения букв в сравниваемых текстах – получить дробное значение от 0
+до 1 как результат деления количества совпадений на общее число букв. Расписать подробно
+в отчёте алгоритм сравнения и приложить сравниваемые тексты в отчёте хотя бы для одного
+запуска по всем пяти случаям. Осознать какие значения получаются в этих пяти случаях.
+Привести соображения о том почему так происходит.\\
+\\
+Длина сравниваемых текстов должна совпадать. Привести соображения о том какой длины
+текста должно быть достаточно для корректного сравнения.
+
+\subsection*{Метод решения}
+Я взяла осмысленные тексты из \href{http://www.gutenberg.org}{http://www.gutenberg.org}. Тексты из случайных букв генерировались с использованием регистрозависимого латинского алфавита. Случайные слова были взяты из файлов \href{https://github.com/first20hours/google-10000-english}{https://github.com/first20hours/google-10000-english}.\\
+\\
+Длина слов для текстов из случайных букв составляет от 3 до 10 символов, для текстов из слов -- беру слова из трех файлов(короткие, средние, длинные).\\
+\\
+Сравнение текстов происходит побуквенно, если буквы в одинаковых позициях совпали, то увеличиваем счетчик совпадений. 
+\\
+Результаты сравнения:\\
+
+\begin{lstlisting}
+Comparison 1: two meaningful text in natural language
+Text length: 717618
+Match percentage: 0.062095711088629324
+Comparison 2: meaningful text and text from random letters
+Text length: 717618
+Match percentage: 0.035779481562614096
+Comparison 3: meaningful text and text from random words
+Text length: 717618
+Match percentage: 0.06200234665239723
+Comparison 4: two texts from random letters
+Text length: 700000
+Match percentage: 0.03456957142857143
+Comparison 5: two texts from random words
+Text length: 700000
+Match percentage: 0.06566414285714287
+\end{lstlisting}
+
+\subsection*{Исходный код}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+ 
+\lstinputlisting[language=Python]{code/main.py}
+
+\subsection*{Выводы}
+По результатам видно, что лучше всего совпали осмысленные тексты, осмысленный текст и текст из случайных слов, а также два текста из случайных слов.\\
+\\
+Что касается осмысленных текстов, то здесь вероятность высокого совпадения выше по причине лингвистических особенностей. Устоявшиеся конструкции, так называемые n-граммы, часто встречающиеся слоги и т.д. Для опыта я взяла разные произведения - <<Гордость и предубеждение>> Д.Остин и <<Война и мир>> Л.Толстова. Процент совпадения получился около 0.06. Затем для интереса были взяты произведения одного автора - сказки братьев Гримм. В таком сравнении процент совпадения текстов возрос и составил около 0.07. Очевидно, что у каждого автора есть свой почерк, свой словарь, что увеличивает "повторения".\\
+\\
+В текстах из случайных слов в моем случае был взят единый словарь. Это, конечно же, дало высокий показатель совпадений. В случае использования разных словарей, сравнение дает более низкий результат.\\
+\\
+Со случайными буквами всё гораздо сложнее. Невозможно дать точную оценку совпадений, так как в тестах использовался регистрозависимый алфавит. В случае сравнения двух текстов, мы видим, что вероятность встретить ту или иную букву составила $\dfrac{1}{58}$ вместо $\dfrac{1}{26}$ в регистронезависимом алфавите. Становится ясно, что это ухудшает ситуацию.\\
+\\
+Попытки сравнить осмысленный текст и текст из случайных букв видятся мне не самыми удачными по причине того, что в тексте какого-либо произвидения, например, встречаются ещё и знаки препинания. Если принебречь заглавными буквами в случайном тексте, то, возможно, в сравнении будет больше смысла.
+
+\end{document}\grid

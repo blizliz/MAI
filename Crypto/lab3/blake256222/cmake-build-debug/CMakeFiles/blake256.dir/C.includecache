@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andrey/LIZA/Crypto/blake256222/blake256.h
+string.h
+-
+stdio.h
+-
+stdint.h
+-
+string.h
+-
+stdlib.h
+-
+
+/home/andrey/LIZA/Crypto/blake256222/main.c
+blake256.h
+/home/andrey/LIZA/Crypto/blake256222/blake256.h
+
