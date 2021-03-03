@@ -1,0 +1,17 @@
+xs: (-1 0 1 2 3)
+
+ys: (-0.5 0 0.5 0.86603 1)
+
+First derivative:
+
+First order of accuracy:
+Left-side y'(1) = 1
+Right-side y'(1) = 7
+y'(1) = 4
+
+Second order of accuracy:
+y'(1) = 4
+
+Second derivative:
+
+y''(1) = 6

@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/Print.h
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/RungeKuttaMethod.h
+iostream
+-
+vector
+-
+cmath
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/Triangle_matrix_Algorithm.h
+iostream
+-
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+cmath
+-
+RungeKuttaMethod.h
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/RungeKuttaMethod.h
+Print.h
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/Print.h
+Triangle_matrix_Algorithm.h
+/home/andrey/LIZA/NumericalMethods/Lab4_2/4_2/Triangle_matrix_Algorithm.h
+

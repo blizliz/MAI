@@ -1,0 +1,3 @@
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/cmake-build-debug/CMakeFiles/Lab3_2.dir
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/cmake-build-debug/CMakeFiles/edit_cache.dir

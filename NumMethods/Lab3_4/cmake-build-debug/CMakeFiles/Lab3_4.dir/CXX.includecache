@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andrey/LIZA/NumericalMethods/Lab3_4/Print.h
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab3_4/main.cpp
+iostream
+-
+cmath
+-
+vector
+-
+fstream
+-
+Print.h
+/home/andrey/LIZA/NumericalMethods/Lab3_4/Print.h
+

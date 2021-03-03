@@ -1,0 +1,37 @@
+xs: (-1 0 1 2 3 4)
+
+ys: (0.86603 1 0.86603 0.5 0 -0.5)
+
+
+
+Approximating 1-degree polynomial:
+
+Matrix A:
+6          9          
+9          31         
+
+Vector b:
+(2.73 -1)
+
+a0 = 0.892
+a1 = -0.291
+f(x): (1.18 0.892 0.601 0.31 0.0184 -0.273)
+
+Sum of square errors = 0.271
+
+Approximating 2-degree polynomial:
+
+Matrix A:
+6          9          31         
+9          31         99         
+31         99         355        
+
+Vector b:
+(2.73 -1 -4.27)
+
+a0 = 0.947
+a1 = -0.0431
+a2 = -0.0827
+f(x): (0.908 0.947 0.822 0.53 0.0735 -0.549)
+
+Sum of square errors = 0.0152

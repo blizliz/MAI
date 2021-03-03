@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/Print.h
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/Triangle_matrix_Algorithm.h
+iostream
+-
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/main.cpp
+iostream
+-
+cmath
+-
+Print.h
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/Print.h
+Triangle_matrix_Algorithm.h
+/home/andrey/LIZA/NumericalMethods/Lab3_2/Lab3_2/Triangle_matrix_Algorithm.h
+

@@ -1,0 +1,36 @@
+Matrix A:
+24     2      4      -9     
+-6     -27    -8     -6     
+-4     8      19     6      
+4      5      -3     -12    
+
+Matrix alpha:
+0      -0.0833 -0.167 0.375  
+-0.222 0      -0.296 -0.222 
+0.211  -0.421 0      -0.316 
+0.333  0.417  -0.25  0      
+
+Vector beta:
+(-0.375 2.81 -4.16 5.83)
+
+Accuracy = 0.01
+
+ITERATIVE METHOD
+Alpha matrix norm = 1
+Nnumber of iterations = 10
+Unknowns x:
+x1 = 4.33
+x2 = 1.77
+x3 = -7.08
+x4 = 9.78
+
+
+SEIDEL METHOD
+Alpha matrix norm = 1
+Nnumber of iterations = 7
+Unknowns x:
+x1 = 4.33
+x2 = 1.78
+x3 = -7.09
+x4 = 9.79
+

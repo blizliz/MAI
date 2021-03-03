@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andrey/LIZA/NumericalMethods/Lab1_5/Matrix.h
+iostream
+-
+vector
+-
+fstream
+-
+
+/home/andrey/LIZA/NumericalMethods/Lab1_5/Print.h
+Matrix.h
+/home/andrey/LIZA/NumericalMethods/Lab1_5/Matrix.h
+
+/home/andrey/LIZA/NumericalMethods/Lab1_5/main.cpp
+iostream
+-
+vector
+-
+cmath
+-
+fstream
+-
+complex
+-
+algorithm
+-
+Matrix.h
+/home/andrey/LIZA/NumericalMethods/Lab1_5/Matrix.h
+Print.h
+/home/andrey/LIZA/NumericalMethods/Lab1_5/Print.h
+

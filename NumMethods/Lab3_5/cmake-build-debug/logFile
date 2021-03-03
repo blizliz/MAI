@@ -1,0 +1,66 @@
+X0 = 0, Xk = 4
+Exact solution = 0.071
+
+RECTANGLE METHOD with step h = 1:
+x = 1, f = 0.0165289
+x = 2, f = 0.0372902
+x = 3, f = 0.0561938
+x = 4, f = 0.0728406
+
+F = 0.0728406
+errors:0.00184061
+
+
+RECTANGLE METHOD with step h = 0.5:
+x = 0.5, f = 0.00554017
+x = 1, f = 0.0151402
+x = 1.5, f = 0.025546
+x = 2, f = 0.0357724
+x = 2.5, f = 0.0455074
+x = 3, f = 0.0546703
+x = 3.5, f = 0.0632653
+x = 4, f = 0.0713277
+
+F = 0.0713277
+Error = 0.000327667
+Runge-Romberg error: -0.00201726
+
+TRAPEZOIDAL METHOD with step h = 1:
+x = 1, f = 0.0102041
+x = 2, f = 0.0304082
+x = 3, f = 0.0492839
+x = 4, f = 0.0659721
+
+F = 0.0659721
+Error = 0.00502786
+
+TRAPEZOIDAL METHOD with step h = 0.5:
+x = 0.5, f = 0.00413223
+x = 1, f = 0.0133665
+x = 1.5, f = 0.0236589
+x = 2, f = 0.0338492
+x = 2.5, f = 0.0435751
+x = 3, f = 0.0527388
+x = 3.5, f = 0.0613384
+x = 4, f = 0.0694064
+
+F = 0.0694064
+Error = 0.00159362
+Runge-Romberg error: 0.00457898
+
+SIMPSON METHOD with step h = 1:
+x = 1, f1 = 0.0338776
+x = 3, f1 = 0.0694212
+
+F = 0.0694212
+Error = 0.00157881
+
+SIMPSON METHOD with step h = 1:
+x = 0.5, f1 = 0.0144206
+x = 1.5, f1 = 0.0349962
+x = 2.5, f1 = 0.0538905
+x = 3.5, f1 = 0.0705511
+
+F = 0.0705511
+Error = 0.000448878
+Runge-Romberg error: 0.00120526
